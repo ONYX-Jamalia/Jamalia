@@ -9,7 +9,7 @@ export const PRODUCTS = [
         price: 15.99,
         weight: 'kg',
         productImage: products1,
-        category: "cutlery"
+        category: "A"
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ export const PRODUCTS = [
         price: 12.99,
         weight: 'kg',
         productImage: products2,
-        category: "furniture"
+        category: "B"
     },
    
 ]
