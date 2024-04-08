@@ -37,74 +37,17 @@ function Products() {
 
   return (
     <>
-      <div class="container">
-        
-      <div className="flex flex-col space-x-10" class="mt-5">
-              <h3 className="mb-5 text-sm">Categories</h3>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  onChange={() => handleCategoryChange("Cat A")}
-                />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  A
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  onChange={() => handleCategoryChange("Cat B")}
-                />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  B
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  onChange={() => handleCategoryChange("Cat C")}
-                />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  C
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  onChange={() => handleCategoryChange("Cat D")}
-                />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  D
-                </label>
-              </div>
-            </div>
-          </div>
-        
-
-
-          <section>
-              <div className="  ml-96 item-center text-xl">
-                <h1>Products</h1>
+           <section>
+              <div className=" flex  mt-20 mb-20  justify-center text-xl">
+                <h1 className="text-amber-600 text-4xl font-bold">Products</h1>
               </div>
               
-              <div className="flex flex-col mb-80 ml-20">
-              <div className=" w-10/12 grid grid-cols-4 gap-36   ">
+              <div className="flex flex-col mb-80 ml-20 w-10/12 ">
+              <div className="  grid gap-x-8 gap-y-4 grid-cols-4">
                 <div className= "flex flex-nowrap">
                 {filteredProducts.map((PRODUCTS) =>{
                   return(
-                    <div className="w-80 h-64 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl space-x-44">
+                    <div className="w-80 h-64 mr-10 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl ">
                     <img
                     src={PRODUCTS.productImage}
                     alt=""
@@ -112,7 +55,7 @@ function Products() {
                   />
             
                     <div className="flex justify-start w-80">
-                    <span className="mr-44 text-gray-400  uppercase text-xs">
+                    <span className="mr-44 text-gray-400  uppercase text-xl">
                     {PRODUCTS.productName}                   
                      </span>
                     </div>
