@@ -1,31 +1,28 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "./firebase-config"; 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [alert, setAlert] = useState(null);
+  const auth = getAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const signinData = new FormData(event.target);
 
-    // getting form data
     const email = signinData.get('email');
     const password = signinData.get('password');
-
-    try {
-      // using firebase authentication
-       await auth.signInWithEmailAndPassword(email, password);
-
-      //  redirect to user dashboard
-      window.location.href = "";
-    } catch (error) {
-      //  display the error message
-      setAlert(error.message);
-      console.error('Wrong email or password!!:', error);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    
+      const user = userCredential.user;
+      // Redirect to dashboard 
+       window.location.href = "/dashboard";
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error('Wrong email or password!!', error);
+      
+    });
   };
 
   return (
@@ -41,14 +38,14 @@ export default function SignIn() {
               <div>
                 <label className="text-xs block mb-2">Email</label>
                 <div className="relative flex items-center">
-                  <input autoComplete="on" name="email" type="text" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <input autoComplete="on" name="email" type="text" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter email" />
                   <i className="fa-regular fa-envelope w-[18px] h-[18px] absolute right-2"></i>
                 </div>
               </div>
               <div className="mt-8">
                 <label className="text-xs block mb-2">Password</label>
                 <div className="relative flex items-center">
-                  <input autoComplete="off" name="password" type="password" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <input autoComplete="off" name="password" type="password" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
                   <i className="fa-solid fa-lock w-[18px] h-[18px] absolute right-2 cursor-pointer"></i>
                 </div>
               </div>
