@@ -2,9 +2,12 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import "../../src/index.css";
 import { auth, db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
-  const signin = (event) => {
+  const navigate = useNavigate();
+
+  const signUp = (event) => {
     event.preventDefault();
     const signupData = new FormData(event.target);
     // call firebase Auth signup
@@ -27,6 +30,7 @@ export default function SignUp() {
             console.error("Error adding document: ", e);
           }
           
+        navigate('/');
         console.log(userCredential);
       })
       .catch((error) => {
@@ -40,7 +44,7 @@ export default function SignUp() {
         <section className="signup">
           <div className="signup__container">
             <p>Jamalia</p>
-            <form onSubmit={signin} className="form">
+            <form onSubmit={signUp} className="form">
               <div>
                 <label htmlFor="title">Email Address*</label>
                 <input
