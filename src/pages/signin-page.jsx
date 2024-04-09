@@ -15,13 +15,13 @@ export default function SignIn() {
     
       const user = userCredential.user;
       // Redirect to dashboard 
-       window.location.href = "/dashboard";
+       window.location.href = "/";
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error('Wrong email or password!!', error);
-      
+      console.log('user', )
     });
   };
 
