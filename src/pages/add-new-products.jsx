@@ -27,7 +27,7 @@ export default function AddNewProducts() {
   return (
     <>
       <Navbar />
-      <section className="bg-slate-100 p-6">
+      <section className="bg-zinc-300 p-6">
         <h1 className="text-xl font-bold mb-2 md:text-center md:text-2xl">Add New Product</h1>
 
         <div className="md:flex md:justify-center">
