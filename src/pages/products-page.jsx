@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import products1 from '../assets/cutlery.jpg'
-import products2 from '../assets/furniture.avif'
+import products2 from '../assets/furniture.avif';
+import Navbar from "../components/navbar";
 
 
 function Products() {
@@ -37,6 +38,7 @@ function Products() {
 
   return (
     <>
+    <Navbar/>
            <section>
               <div className=" flex  mt-20 mb-20  justify-center text-xl">
                 <h1 className="text-amber-600 text-4xl font-bold">Products</h1>
