@@ -27,7 +27,7 @@ export default function Homepage() {
       <Navbar />
       <section>
         <i class="fa-regular fa-face-smile"></i>
-        <h1 className="text-3xl font-bold underline">{userEmail}</h1>
+        <h1 className="font-bold text-2xl">This is our landing page</h1>
       </section>
     </>
   );
