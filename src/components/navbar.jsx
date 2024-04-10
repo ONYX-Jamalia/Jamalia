@@ -11,13 +11,27 @@ export default function Navbar() {
 
   return (
     <>
-      <section className="flex gap-48 px-2.5 py-1.5 lg:px-6 lg:py-0 bg-neutral-100">
+      <section className="flex justify-between lg:gap-56 px-2.5 py-1.5 lg:px-6 lg:py-0 bg-neutral-100">
         <div>
           <img
             src={logo}
             alt="logo of jamlia app"
             className="w-16 h-8 md:w-24 md:h-12 lg:w-48 lg:h-20 "
           />
+        </div>
+
+        <div className="md:hidden">
+        <form class="d-flex" role="search" className="flex">
+              <input
+                class="form-control me-1 h-8"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success  me-3" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+        </form>
         </div>
 
         <div className="md:hidden">
@@ -74,7 +88,7 @@ export default function Navbar() {
                   Register
                 </Link>
                 <Link
-                  to="/signin"
+                  to=""
                   className="block text-orange-600 text-sm px-4 py-2 "
                 >
                   Login
@@ -84,23 +98,23 @@ export default function Navbar() {
           )}
         </div>
 
-        <div className="hidden md:block pt-2 lg:pt-6 lg:flex lg:gap-48">
+        <div className="hidden md:block pt-2 lg:pt-6 md:flex md:gap-12 lg:gap-56">
           <div className="text-white flex gap-4 lg:gap-10">
-            <Link to="/" className="text-orange-600 hover:text-orange-300">
+            <Link to="/" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
               Home
             </Link>
             <Link
               to="/products"
-              className="text-orange-600 hover:text-orange-300"
+              className="text-sm lg:text-base text-orange-600 hover:text-orange-300"
             >
               Products
             </Link>
-            <Link to="" className="text-orange-600 hover:text-orange-300">
+            <Link to="" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
               Categories
             </Link>
             <Link
               to="/addnewproducts"
-              className="text-orange-600 hover:text-orange-300"
+              className="text-sm lg:text-base text-orange-600 hover:text-orange-300"
             >
               AddProducts
             </Link>
@@ -110,15 +124,15 @@ export default function Navbar() {
           <div>
           <form class="d-flex" role="search" className="flex">
               <input
-                class="form-control me-1"
+                class="form-control me-1 md:h-8 md:w-36 lg:w-52"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
               <button class="btn btn-outline-success  me-3" type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass text-sm lg:text-base"></i>
               </button>
-              <Link class="btn btn-outline-success" to="/signin">
+              <Link class="btn btn-outline-success text-sm lg:text-base" to="">
                 Login
               </Link>
             </form>
