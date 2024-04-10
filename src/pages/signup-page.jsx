@@ -40,9 +40,9 @@ export default function SignUp() {
         }
       })
       .catch((error) => {
-        const errorMsg = error.customData._tokenResponse.error.message;
-        if (errorMsg) {
-          setNotice("Email already exist");
+        // const errorMsg = error.customData._tokenResponse.error.message;
+        if (error) {
+          setNotice("error please try again");
           setTimeout(() => {
             setNotice(null);
           }, 3000);

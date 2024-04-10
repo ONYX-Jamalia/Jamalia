@@ -41,9 +41,9 @@ export default function Navbar() {
                         <Link to="/products" className="text-orange-600 hover:text-orange-300">Products</Link>
                         <Link to="/addnewproducts" className="text-orange-600 hover:text-orange-300">AddProducts</Link>
 
-                        <Link to="/signup" className="text-orange-600 hover:text-orange-300">Register</Link>
+                        <Link to="" className="text-orange-600 hover:text-orange-300">Logout</Link>
 
-                        <Link to="/signin" className="text-orange-600 hover:text-orange-300">Login</Link>
+                        
                     </div>
                 </div>
                 
