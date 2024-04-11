@@ -76,19 +76,7 @@ export default function Navbar() {
                   Categories
                 </Link>
                 <Link
-                  to="/addnewproducts"
-                  className="block text-orange-600 text-sm px-4 py-2 "
-                >
-                  AddProducts
-                </Link>
-                <Link
-                  to="/signup"
-                  className="block text-orange-600 text-sm px-4 py-2 "
-                >
-                  Register
-                </Link>
-                <Link
-                  to=""
+                  to="/signin"
                   className="block text-orange-600 text-sm px-4 py-2 "
                 >
                   Login
@@ -112,12 +100,6 @@ export default function Navbar() {
             <Link to="" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
               Categories
             </Link>
-            <Link
-              to="/addnewproducts"
-              className="text-sm lg:text-base text-orange-600 hover:text-orange-300"
-            >
-              AddProducts
-            </Link>
 
           </div>
 
@@ -132,7 +114,7 @@ export default function Navbar() {
               <button class="btn btn-outline-success  me-3" type="submit">
                 <i class="fa-solid fa-magnifying-glass text-sm lg:text-base"></i>
               </button>
-              <Link class="btn btn-outline-success text-sm lg:text-base" to="">
+              <Link class="btn btn-outline-success text-sm lg:text-base" to="/signin">
                 Login
               </Link>
             </form>
