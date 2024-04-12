@@ -4,6 +4,8 @@ import Homepage from "./pages/homepage";
 import Products from "./pages/products-page";
 import SignIn from "./pages/signin-page";
 import SignUp from "./pages/signup-page";
+import ProductDetails from "./pages/products-details";
+import Invoice from "./pages/invoice";
 
 import SupplierDashboard from "./pages/supplier/dashboard";
 import AddNewProducts from "./pages/supplier/add-new-products";
@@ -13,6 +15,8 @@ const router = createBrowserRouter([
   { path: "/products", element: <Products /> },
   { path: "/signin", element: <SignIn /> },
   { path: "/signup", element: <SignUp /> },
+  { path: "/productdetails", element: <ProductDetails />},
+  { path: "/invoice", element: <Invoice/> },
 
   { path: "/supplierdashboard", element: <SupplierDashboard /> },
   { path: "/addnewproducts", element: <AddNewProducts /> },
