@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 import herobg from "../assets/herobg.png";
 import logo from "../assets/logo.png";
+import electron1 from "../assets/electronic1.png";
+import electron2 from "../assets/electronic2.png";
+
 
 const imageUrls = [
   logo,
@@ -86,30 +89,73 @@ export default function Homepage() {
         </section>
 
 
-        <section className="bg-orange-300 p-4">
+        <section className="bg-orange-600 p-4 md:flex md:py-10 lg:py-16">
 
           <div className="text-center">
-          <h4>Trade-in-offer</h4>
-            <h2>Great value deals</h2>
-            <h1>On all Our Products</h1>
-            <p>Explore millions of offerings tailored to your business needs</p>
-            <button className="bg-white border rounded px-1 font-semibold"> <Link to=""> Become A Supplier</Link></button>
+          <h4 className="md:text-xl">Trade-in-offer</h4>
+            <h2 className="md:text-3xl">Great value deals</h2>
+            <h1 className="md:text-3xl">On all Our Services</h1>
+            <p className="md:text-xl">Explore millions of offerings tailored to your business needs</p>
+            <button className="bg-green-800  rounded px-1 font-semibold text-white md:text-xl md:p-2"> <Link to=""> Become A Supplier</Link></button>
           </div>
 
-          <div id="xxx">
-          <div
-          style={{
-            height: '393px',
-            marginTop: '5.5%',
-            backgroundImage: `url(${imageUrls[currentImageIndex]})`,
-          }}
-        >
-        </div>
+          <div className="text-center">
+            <h1 className="text-4xl front-bold">Carousel goes here</h1>
 
           </div>
 
-          
+        </section>
 
+
+        <section className="flex gap-4 md:gap-10 py-10 px-4">
+          <div className="w-3/5 md:w-9/12">
+            <h1 className="text-sm font-semibold md:text-xl lg:text-4xl">Explore products and suppliers for your business from millions of offerings worldwide</h1>
+          </div>
+
+          <div className="w-2/5 flex gap-2 lg:gap-10 ">
+            <div>
+              <div className="border-l md:border-l-2 border-slate-400 mb-2 lg:mb-4 pl-1 md:pl-2 lg:pl-6">
+                <h1 className="text-orange-600 font-semibold text-lg md:text-xl lg:text-4xl">200M+</h1>
+                <p className="text-sm md:text-lg lg:font-semibold">Products</p>
+              </div>
+              <div className="border-l md:border-l-2 border-slate-400 pl-1 md:pl-2 lg:pl-6">
+                <h1 className="text-orange-600 font-semibold text-lg md:text-xl lg:text-4xl">200K+</h1>
+                <p className="text-sm md:text-lg lg:font-semibold">Suppliers</p>
+              </div>
+            </div>
+            <div>
+              <div className="border-l md:border-l-2 border-slate-400 mb-2 lg:mb-4 pl-1 md:pl-2 lg:pl-6">
+                <h1 className="text-orange-600 font-semibold text-lg md:text-xl lg:text-4xl">5,900</h1>
+                <p className="text-sm md:text-lg lg:font-semibold"> Categories</p>
+              </div>
+              <div className="border-l md:border-l-2 border-slate-400 pl-1 md:pl-2 lg:pl-6">
+                <h1 className="text-orange-600 font-semibold text-lg md:text-xl lg:text-4xl">200+</h1>
+                <p className="text-sm md:text-lg lg:font-semibold">Countries</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section className="bg-slate-50">
+
+          <div>
+            <h1 className="font-semibold">Discover your next business opportunity</h1>
+          </div>
+
+          <div>
+
+            <div id="electronics" className="bg-white">
+              <img src={electron1} alt="electronic device" />
+
+              <img src={electron2} alt="electronic device" />
+            </div>
+
+            <div id="cosmetics"></div>
+
+            <div id="furniture"></div>
+
+          </div>
         </section>
 
 
