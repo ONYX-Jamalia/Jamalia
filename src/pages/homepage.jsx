@@ -16,6 +16,7 @@ const imageUrls = [
   logo
 ]
 
+
 export default function Homepage() {
 
 
@@ -161,6 +162,7 @@ export default function Homepage() {
 
 
       </section>
+      <Footer/>
     </>
   );
 }
