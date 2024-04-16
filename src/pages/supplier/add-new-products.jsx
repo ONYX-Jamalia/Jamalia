@@ -13,8 +13,6 @@ export default function AddNewProducts() {
   const [imgUrl, setImgUrl] = useState(null);
   const [imgResult, setImgResult] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
-  
-export default function AddNewProducts({sidebarToggle, setsetUserPage}) {
 
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -60,10 +58,6 @@ export default function AddNewProducts({sidebarToggle, setsetUserPage}) {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleImage = (e) => {
-    setImgUrl(e);
   };
 
   const handleClear = () => {
@@ -158,7 +152,7 @@ export default function AddNewProducts({sidebarToggle, setsetUserPage}) {
                 id="productimage"
                 accept="image/*"
                 className="border border-slate-300 rounded w-full p-1 mt-0.5 mb-3"
-                onChange={(e) => handleImage(e.target.files[0])}
+                onChange={(e) => setImgUrl(e.target.files[0])}
               />
               <br />
 
@@ -228,6 +222,7 @@ export default function AddNewProducts({sidebarToggle, setsetUserPage}) {
       </section>
 
       </div>
+      </section>
     </>
   );
 }
