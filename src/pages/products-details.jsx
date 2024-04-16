@@ -76,11 +76,19 @@ export default function ProductDetails() {
             </div>
           </div>
         </section>
-        <section className="w-[20%] bg-white py-16 m-4 text-center md:text-left">
-          <div>
-            <p>DELIVERY & RETURNS</p> <hr />
+        {/* <section className="w-[20%] bg-white py-16 m-4 text-center md:text-left">
+          <div className="justify-center">
+            <p>SELLER INFORMATION</p> <hr />
+            <h4>Name</h4>
+            <h6>54% Seller Score</h6>
+            <h6>843 followers</h6>
+            <button className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 md:">FOLLOW</button>
           </div>
-        </section>
+          <hr />
+          <div>
+            <h4>Seller Performance</h4>
+          </div>
+        </section> */}
       </div>
     </>
   );
