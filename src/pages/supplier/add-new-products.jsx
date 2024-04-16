@@ -6,12 +6,15 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 // import { storage } from './firebase';
 
+
 export default function AddNewProducts() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [userPage, setsetUserPage] = useState("add-new-products");
   const [imgUrl, setImgUrl] = useState(null);
   const [imgResult, setImgResult] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
+  
+export default function AddNewProducts({sidebarToggle, setsetUserPage}) {
 
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -85,6 +88,9 @@ export default function AddNewProducts() {
       </div>
 
       <section className="ml-14 p-6">
+
+      <div>
+      <section className="p-6">
         <h1 className="text-xl text-green-700 font-bold mb-2 md:text-center md:text-2xl">
           Add New Product
         </h1>
@@ -220,6 +226,8 @@ export default function AddNewProducts() {
       <section>
         <img src={imgUrl} alt="image" />
       </section>
+
+      </div>
     </>
   );
 }
