@@ -3,11 +3,7 @@ import {Navbar} from "../../components/supplier/navbar.jsx";
 import { Sidebar } from "../../components/supplier/sidebar.jsx";
 
 
-export default function AddNewProducts() {
-
-  const [sidebarToggle, setSidebarToggle] = useState(false);
-  const [userPage, setsetUserPage] = useState("add-new-products");
-
+export default function AddNewProducts({sidebarToggle, setsetUserPage}) {
 
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -31,18 +27,7 @@ export default function AddNewProducts() {
 
   return (
     <>
-      <div className="flex bg-violet-100">
-        <Sidebar
-          sidebarToggle={sidebarToggle}
-          setsetUserPage={setsetUserPage}
-        />
-        <Navbar
-          sidebarToggle={sidebarToggle}
-          setSidebarToggle={setSidebarToggle}
-        />
-      </div>
-
-
+      <div>
       <section className="p-6">
         <h1 className="text-xl text-green-700 font-bold mb-2 md:text-center md:text-2xl">
           Add New Product
@@ -174,6 +159,7 @@ export default function AddNewProducts() {
           </div>
         </div>
       </section>
+      </div>
     </>
   );
 }

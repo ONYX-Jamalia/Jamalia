@@ -17,9 +17,9 @@ export const  Sidebar = ({sidebarToggle, setsetUserPage}) => {
             
             <Link to="/supplierdashboard" className="px-2"><i className="fa-solid fa-house inline-block 1-6 h-6 mr-2 -mt-2 "></i>Dashboard</Link>
           </li>
-          <li className="text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2"  onClick={()=> setsetUserPage('posts')}>
+          <li className="text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2"  onClick={()=> setsetUserPage('add-new-product')}>
             
-            <Link to="/addnewproducts" className="px-2"><i class="fa-solid fa-plus h-6 mr-2 -mt-2"></i>Add New Product</Link>
+            <Link className="px-2"><i class="fa-solid fa-plus h-6 mr-2 -mt-2"></i>Add New Product</Link>
           </li>
         </ul>
     </div>
