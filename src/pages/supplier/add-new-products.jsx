@@ -1,109 +1,67 @@
 import { useState } from "react";
-import {Navbar} from "../../components/supplier/navbar.jsx";
+import { Navbar } from "../../components/supplier/navbar.jsx";
 import { Sidebar } from "../../components/supplier/sidebar.jsx";
-import { db, storage,auth } from "../../config/firebase.js"
-import { addDoc, collection, getDocs, } from "firebase/firestore";
+import { db, storage } from "../../config/firebase.js";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 // import { storage } from './firebase';
 
 export default function AddNewProducts() {
-
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [userPage, setsetUserPage] = useState("add-new-products");
   const [imgUrl, setImgUrl] = useState(null);
+  const [imgResult, setImgResult] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
-
-
 
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Electronics");
   const [unitPrice, setUnitPrice] = useState("");
   const [minimumOrder, setMinimumOrder] = useState("");
 
   const handleSubmit = async (event) => {
-
     try {
       event.preventDefault();
-      await addDoc(collection(db, 'products'),{
+      if (imgUrl != null || undefined) {
+        const storageRef = ref(storage, `images/${imgUrl.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, imgUrl);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgresspercent(progress);
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setImgResult(downloadURL);
+            });
+          }
+        );
+      }
+
+      await addDoc(collection(db, "products"), {
         productName: productName,
         description: description,
         category: category,
         unitPrice: unitPrice,
-        minimumOrder: minimumOrder
-      })
-  
-  
-      const docSnap = await getDocs(collection(db, "products"));
-      let collectionarray = [];
-      docSnap.forEach((result)=>{
-        // console.log(data.id, "=>", data.data()); 
-        collectionarray.push(result.data())
-      })
-  
-      console.log({collectionarray});
-
-
-      if(imgUrl != null || undefined){
-        const storageRef = ref(storage, `${imgUrl.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imgUrl);
-
-    uploadTask.on("state_changed",
-      (snapshot) => {
-        const progress =
-          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        setProgresspercent(progress);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgUrl(downloadURL)
-        });
-      }
-    )
-      }
-      // if(docSnap){
-      //   console.log("Document", docSnap.json());
-      // }else{
-      //   console.log("No such collection!");
-      // }
-  
-      // Add logic to submit form data to backend server
+        minimumOrder: minimumOrder,
+        image: imgResult
+      });
       console.log("Form submitted successfully!");
     } catch (error) {
       console.log(error);
     }
   };
 
-  
-
   const handleImage = (e) => {
-    setImgUrl(e)
-    // e.preventDefault()
-    // const file = e.target[0]?.files[0]
-    // if (!file) return;
-    // const storageRef = ref(storage, `files/${file.name}`);
-    // const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // uploadTask.on("state_changed",
-    //   (snapshot) => {
-    //     const progress =
-    //       Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-    //     setProgresspercent(progress);
-    //   },
-    //   (error) => {
-    //     alert(error);
-    //   },
-    //   () => {
-    //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-    //       setImgUrl(downloadURL)
-    //     });
-    //   }
-    // )
+    setImgUrl(e);
   };
-
 
   const handleClear = () => {
     setProductName("");
@@ -126,8 +84,7 @@ export default function AddNewProducts() {
         />
       </div>
 
-
-      <section className="p-6">
+      <section className="ml-14 p-6">
         <h1 className="text-xl text-green-700 font-bold mb-2 md:text-center md:text-2xl">
           Add New Product
         </h1>
@@ -195,7 +152,7 @@ export default function AddNewProducts() {
                 id="productimage"
                 accept="image/*"
                 className="border border-slate-300 rounded w-full p-1 mt-0.5 mb-3"
-                onChange={(e)=> handleImage(e.target.files[0])}
+                onChange={(e) => handleImage(e.target.files[0])}
               />
               <br />
 
@@ -258,6 +215,10 @@ export default function AddNewProducts() {
             </form>
           </div>
         </div>
+      </section>
+
+      <section>
+        <img src={imgUrl} alt="image" />
       </section>
     </>
   );

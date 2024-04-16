@@ -7,7 +7,7 @@ export const Navbar = ({sidebarToggle, setSidebarToggle}) => {
       <nav className={`${sidebarToggle ? "" : "ml-36 md:ml-44 lg:ml-72 "}  w-full bg-neutral-100 px-4 py-3 flex justify-between`}>
       <div className="flex item-center text-xl">
         <i className="fa-solid fa-bars lg:text-2xl text-black me-4 cursor-pointer" onClick={()=> setSidebarToggle(!sidebarToggle)}></i>{" "}
-        <span className="text-sm text-black font-semibold">form Name</span>
+        <span className="text-sm text-black font-semibold">Dashboard</span>
       </div>
       <div className="flex item-center gap-x-5">
         <div className="relative md:w-65">

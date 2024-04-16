@@ -71,3 +71,15 @@ textarea{
 .footer{
     top: 0;
 }
+
+.filterrSection{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .filterrSection h3{
+    margin-bottom: 5px;
+    font-size: 0.5rem;
+  }
+  
