@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import Navbar from "../components/navbar";
 import { auth } from "../config/firebase";
 import { useEffect, useState } from "react";
+import Footer from "../components/footer";
 export default function Homepage() {
   const [userEmail, setUserEmail] = useState('')
   const getUser = () => {
@@ -29,6 +30,7 @@ export default function Homepage() {
         <i class="fa-regular fa-face-smile"></i>
         <h1 className="font-bold text-2xl">This is our landing page</h1>
       </section>
+      <Footer/>
     </>
   );
 }
