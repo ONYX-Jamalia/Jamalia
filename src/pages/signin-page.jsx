@@ -1,8 +1,14 @@
-import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 export default function SignIn() {
   const auth = getAuth();
+  const navigate = useNavigate();
+
+  const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -11,18 +17,42 @@ export default function SignIn() {
     const email = signinData.get('email');
     const password = signinData.get('password');
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    
-      const user = userCredential.user;
-      // Redirect to dashboard 
-       window.location.href = "/";
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error('Wrong email or password!!', error);
-      console.log('user', )
-    });
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (rememberMe) {
+          localStorage.setItem('rememberedUser', JSON.stringify({ email }));
+        } else {
+          localStorage.removeItem('rememberedUser');
+        }
+        // Redirect to dashboard
+        navigate("/supplierdashboard");
+      })
+      .catch((error) => {
+        const errorMessage = 'Wrong email or password!!';
+        setError(errorMessage);
+      });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, new GoogleAuthProvider())
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        navigate("/supplierdashboard");
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
   return (
@@ -45,21 +75,23 @@ export default function SignIn() {
               <div className="mt-8">
                 <label className="text-xs block mb-2">Password</label>
                 <div className="relative flex items-center">
-                  <input autoComplete="off" name="password" type="password" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
-                  <i className="fa-solid fa-lock w-[18px] h-[18px] absolute right-2 cursor-pointer"></i>
+                  <input autoComplete="off" name="password" type={showPassword ?'text' : 'password'} required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
+                  <i className={`fa-solid fa-eye${showPassword ? '-slash' : ''} w-[18px] h-[18px] absolute right-2 cursor-pointer`} onClick={togglePasswordVisibility}></i>
                 </div>
               </div>
-              <div class="flex items-center justify-between gap-2 mt-5">
-                <div class="flex items-center">
-                  <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                  <label for="remember-me" class="ml-3 block text-sm">
+              {error && <p className=" text-red-700 px-2 py-2 rounded relative mt-2" role="alert">{error}</p>}
+
+              <div className="flex items-center justify-between gap-2 mt-5">
+                <div className="flex items-center">
+                  <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" onChange={(e) => setRememberMe(e.target.checked)} />
+                  <label htmlFor="remember-me" className="ml-3 block text-sm">
                     Remember me
                   </label>
                 </div>
                 <div>
-                  <a href="" class="text-blue-600 font-semibold text-sm hover:underline">
+                  <Link to="/forgot-password" className="text-blue-600 font-semibold text-sm hover:underline">
                     Forgot Password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-12">
@@ -67,19 +99,18 @@ export default function SignIn() {
                   Sign in
                 </button>
               </div>
-              <div class="space-x-8 flex justify-center">
-              <p class="my-8 text-sm text-gray-400 text-center">or continue with</p>
-                <button type="button"
-                  class="border-none outline-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="inline" viewBox="0 0 512 512">
-                    <path fill="#fbbd00"
+              <div className="space-x-8 flex justify-center">
+                <p className="my-8 text-sm text-gray-400 text-center">or continue with</p>
+                <button onClick={signInWithGoogle} type="button" className="border-none outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30px" className="inline" viewBox="0 0 512 512">
+                  <path fill="#fbbd00"
                       d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z"
                       data-original="#fbbd00" />
                     <path fill="#0f9d58"
                       d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z"
                       data-original="#0f9d58" />
                     <path fill="#31aa52"
-                      d="m139.131 325.477-86.308 86.308a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z"
+                      d="M139.131 325.477-86.308 411.785a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z"
                       data-original="#31aa52" />
                     <path fill="#3c79e6"
                       d="M512 256a258.24 258.24 0 0 0-4.192-46.377l-2.251-12.299H256v120h121.452a135.385 135.385 0 0 1-51.884 55.638l86.216 86.216a260.085 260.085 0 0 0 25.235-22.158C485.371 388.667 512 324.38 512 256z"
@@ -98,5 +129,5 @@ export default function SignIn() {
         </div>
       </div>
     </>
-  )
-};
+  );
+}
