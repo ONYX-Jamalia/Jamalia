@@ -75,6 +75,7 @@ export default function Navbar() {
                 >
                   Categories
                 </Link>
+                
                 <Link
                   to="/signin"
                   className="block text-orange-600 text-sm px-4 py-2 "
@@ -86,7 +87,7 @@ export default function Navbar() {
           )}
         </div>
 
-        <div className="hidden md:block pt-2 lg:pt-6 md:flex md:gap-12 lg:gap-56">
+        <div className="hidden items-center md:block pt-2 lg:pt-6 md:flex md:gap-12 lg:gap-56">
           <div className="text-white flex gap-4 lg:gap-10">
             <Link to="/" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
               Home
@@ -100,7 +101,12 @@ export default function Navbar() {
             <Link to="" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
               Categories
             </Link>
-
+                <div className="relative">
+                <Link className="text-orange-600 absolute z-10" to='/cart'> <i class="fa-solid fa-cart-shopping"></i></Link>
+                <div className="absolute m-0 p-0 top-[-14px] right-[-30px] bg-[#81C408] rounded ">
+                  <p>1</p>
+                </div>
+                </div>
           </div>
 
           <div>
