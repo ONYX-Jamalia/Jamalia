@@ -21,15 +21,15 @@ export default function Navbar() {
         </div>
 
         <div className="md:hidden">
-        <form class="d-flex" role="search" className="flex">
+        <form className="d-flex flex" role="search" >
               <input
-                class="form-control me-1 h-8"
+                className="form-control me-1 h-8"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success  me-3" type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
+              <button className="btn btn-outline-success  me-3" type="submit">
+                <i className="fa-solid fa-magnifying-glass"></i>
               </button>
         </form>
         </div>
@@ -104,17 +104,17 @@ export default function Navbar() {
           </div>
 
           <div>
-          <form class="d-flex" role="search" className="flex">
+          <form className="d-flex flex" role="search">
               <input
-                class="form-control me-1 md:h-8 md:w-36 lg:w-52"
+                className="form-control me-1 md:h-8 md:w-36 lg:w-52"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success  me-3" type="submit">
-                <i class="fa-solid fa-magnifying-glass text-sm lg:text-base"></i>
+              <button className="btn btn-outline-success  me-3" type="submit">
+                <i className="fa-solid fa-magnifying-glass text-sm lg:text-base"></i>
               </button>
-              <Link class="btn btn-outline-success text-sm lg:text-base" to="/signin">
+              <Link className="btn btn-outline-success text-sm lg:text-base" to="/signin">
                 Login
               </Link>
             </form>

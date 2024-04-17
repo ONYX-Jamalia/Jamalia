@@ -3,23 +3,18 @@ import "../index.css";
 import Navbar from "../components/navbar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
-import spareBg from '../assets/cutlery.jpg'
-import engine from '../assets/furniture.avif'
-import spareB from '../assets/logo.png'
+import spareBg from "../assets/cutlery.jpg";
+import engine from "../assets/furniture.avif";
+import spareB from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const imageUrls = [
-    spareBg,
-    engine,
-    spareB
-   ];
- 
-   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const imageUrls = [spareBg, engine, spareB];
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     async function getProducts() {
@@ -51,7 +46,6 @@ function Products() {
 
   return (
     <>
-   
       <Navbar />
 
       <div
@@ -59,8 +53,7 @@ function Products() {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url(${imageUrls[currentImageIndex]})`,
         }}
-      >
-      </div>
+      ></div>
       <div className="container">
         <div className="row">
           <div className="col-2">
@@ -74,7 +67,7 @@ function Products() {
                   id="flexRadioDefault1"
                   onChange={() => handleCategoryChange("Electronics")}
                 />
-                <label className="form-check-label" for="flexRadioDefault1">
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Electronics
                 </label>
               </div>
@@ -86,7 +79,7 @@ function Products() {
                   id="flexRadioDefault1"
                   onChange={() => handleCategoryChange("Clothing")}
                 />
-                <label className="form-check-label" for="flexRadioDefault1">
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Clothing
                 </label>
               </div>
@@ -98,7 +91,7 @@ function Products() {
                   id="flexRadioDefault1"
                   onChange={() => handleCategoryChange("Food")}
                 />
-                <label className="form-check-label" for="flexRadioDefault1">
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Food
                 </label>
               </div>
@@ -110,7 +103,7 @@ function Products() {
                   id="flexRadioDefault1"
                   onChange={() => handleCategoryChange("Others")}
                 />
-                <label className="form-check-label" for="flexRadioDefault1">
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Others
                 </label>
               </div>
@@ -124,37 +117,38 @@ function Products() {
 
               <div className="flex flex-col">
                 <div className="">
-                  <Link to="/productdetails">
                   <div className="grid grid-cols-3 gap-x-8 gap-y-8 mb-40">
                     {filteredProducts.map((PRODUCTS) => {
                       return (
-                        <div className="w-80 h-64 mr-10 bg-white border shadow-xl rounded-xl duration-500 ">
-                          <img
-                            src={PRODUCTS.image}
-                            alt=""
-                            className="h-40 w-80 object-cover rounded-xl"
-                          />
+                        <Link to={`/productdetails/${PRODUCTS.productName}`}>
+                          <div className="w-80 h-64 mr-10 bg-white border shadow-xl rounded-xl duration-500 ">
+                            <img
+                              src={PRODUCTS.image}
+                              alt=""
+                              className="h-40 w-80 object-cover rounded-xl"
+                            />
 
-
-                          <div className="ml-1">
-                            <span className="text-gray-400  uppercase text-md">
-                              {PRODUCTS.productName}
+                            <div className="ml-1">
+                              <span className="text-gray-400  uppercase text-md">
+                                {PRODUCTS.productName}
+                              </span>
+                            </div>
+                            <span className="ml-1 font-bold">
+                              US$: {PRODUCTS.unitPrice}
                             </span>
-                          </div>
-                          <span className="ml-1 font-bold">US$: {PRODUCTS.unitPrice}</span>
 
-                          <div className="flex ml-1">
-                            <span>Min. order:</span>
-                            <p className="ml-1 px-1 bg-violet-100 rounded text-black cursor-auto">
-                            {PRODUCTS.unitPrice}
-                          </p>
-                          <span>pieces</span>
+                            <div className="flex ml-1">
+                              <span>Min. order:</span>
+                              <p className="ml-1 px-1 bg-violet-100 rounded text-black cursor-auto">
+                                {PRODUCTS.unitPrice}
+                              </p>
+                              <span>pieces</span>
+                            </div>
                           </div>
-                        </div>
+                        </Link>
                       );
                     })}
                   </div>
-                  </Link>
                 </div>
               </div>
             </section>
