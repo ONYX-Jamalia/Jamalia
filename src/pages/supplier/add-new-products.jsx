@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Navbar } from "../../components/supplier/navbar.jsx";
-import { Sidebar } from "../../components/supplier/sidebar.jsx";
-import { db, storage } from "../../config/firebase.js";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { auth, db, storage } from "../../config/firebase.js";
+import { addDoc, collection } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
 // import { storage } from './firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function AddNewProducts() {
@@ -19,11 +19,13 @@ export default function AddNewProducts() {
   const [category, setCategory] = useState("Electronics");
   const [unitPrice, setUnitPrice] = useState("");
   const [minimumOrder, setMinimumOrder] = useState("");
+  const [userId, setUserId] = useState('')
 
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      if (imgUrl != null || undefined) {
+      console.log(imgUrl);
+      if (imgUrl) {
         const storageRef = ref(storage, `images/${imgUrl.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imgUrl);
 
@@ -39,26 +41,52 @@ export default function AddNewProducts() {
             alert(error);
           },
           () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setImgResult(downloadURL);
+            getDownloadURL(uploadTask.snapshot.ref).then(async (imageurl) => {
+              const uuid = uuidv4();
+              await addDoc(collection(db, "products"), {
+                id: uuid,
+                userId: userId,
+                productName: productName,
+                description: description,
+                category: category,
+                unitPrice: unitPrice,
+                minimumOrder: minimumOrder,
+                image: imageurl
+              });
             });
           }
         );
       }
 
-      await addDoc(collection(db, "products"), {
-        productName: productName,
-        description: description,
-        category: category,
-        unitPrice: unitPrice,
-        minimumOrder: minimumOrder,
-        image: imgResult
-      });
+     
       console.log("Form submitted successfully!");
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      try {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/auth.user
+          // const uid = user.uid;
+          console.log(user);
+          setUserId(user.uid);
+          // ...
+        } else {
+          setUserId('');
+          // User is signed out
+          // ...
+        }
+      } catch (error) {
+        console.log({error})
+      }
+    });
+  };
+
+  useEffect(getUser,[]);
 
   const handleClear = () => {
     setProductName("");
@@ -70,17 +98,6 @@ export default function AddNewProducts() {
 
   return (
     <>
-      <div className="flex bg-violet-100">
-        <Sidebar
-          sidebarToggle={sidebarToggle}
-          setsetUserPage={setsetUserPage}
-        />
-        <Navbar
-          sidebarToggle={sidebarToggle}
-          setSidebarToggle={setSidebarToggle}
-        />
-      </div>
-
       <section className="ml-14 p-6">
 
       <div>

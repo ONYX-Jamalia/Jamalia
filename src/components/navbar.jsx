@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [itemslist, setItemsList] = useLocalStorage("Item List", []);
+  const [totalItems, getItemsTotal] = useState(0);
+
+  let calculate = () => {
+    let cartValue = itemslist.map((x) => x.item).reduce((x, y) => x + y, 0);
+    getItemsTotal(Math.floor(cartValue));
+  };
+
+  useEffect(() => {
+    calculate();
+  }, [itemslist]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -21,17 +33,17 @@ export default function Navbar() {
         </div>
 
         <div className="md:hidden">
-        <form className="d-flex flex" role="search" >
-              <input
-                className="form-control me-1 h-8"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success  me-3" type="submit">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-        </form>
+          <form className="d-flex flex" role="search">
+            <input
+              className="form-control me-1 h-8"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button className="btn btn-outline-success  me-3" type="submit">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
         </div>
 
         <div className="md:hidden">
@@ -75,7 +87,7 @@ export default function Navbar() {
                 >
                   Categories
                 </Link>
-                
+
                 <Link
                   to="/signin"
                   className="block text-orange-600 text-sm px-4 py-2 "
@@ -89,7 +101,10 @@ export default function Navbar() {
 
         <div className="hidden items-center md:block pt-2 lg:pt-6 md:flex md:gap-12 lg:gap-56">
           <div className="text-white flex gap-4 lg:gap-10">
-            <Link to="/" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
+            <Link
+              to="/"
+              className="text-sm lg:text-base text-orange-600 hover:text-orange-300"
+            >
               Home
             </Link>
             <Link
@@ -98,19 +113,25 @@ export default function Navbar() {
             >
               Products
             </Link>
-            <Link to="" className="text-sm lg:text-base text-orange-600 hover:text-orange-300">
+            <Link
+              to=""
+              className="text-sm lg:text-base text-orange-600 hover:text-orange-300"
+            >
               Categories
             </Link>
-                <div className="relative">
-                <Link className="text-orange-600 absolute z-10" to='/cart'> <i class="fa-solid fa-cart-shopping"></i></Link>
-                <div className="absolute m-0 p-0 top-[-14px] right-[-30px] bg-[#81C408] rounded ">
-                  <p>1</p>
-                </div>
-                </div>
+            <div className="relative">
+              <Link className="text-orange-600 absolute z-10" to="/cart">
+                {" "}
+                <i class="fa-solid fa-cart-shopping"></i>
+              </Link>
+              <div className="absolute m-0 px-1 top-[-17px] right-[-30px] bg-[#81C408] rounded ">
+                <p>{totalItems}</p>
+              </div>
+            </div>
           </div>
 
           <div>
-          <form className="d-flex flex" role="search">
+            <form className="d-flex flex" role="search">
               <input
                 className="form-control me-1 md:h-8 md:w-36 lg:w-52"
                 type="search"
@@ -120,7 +141,10 @@ export default function Navbar() {
               <button className="btn btn-outline-success  me-3" type="submit">
                 <i className="fa-solid fa-magnifying-glass text-sm lg:text-base"></i>
               </button>
-              <Link className="btn btn-outline-success text-sm lg:text-base" to="/signin">
+              <Link
+                className="btn btn-outline-success text-sm lg:text-base"
+                to="/signin"
+              >
                 Login
               </Link>
             </form>

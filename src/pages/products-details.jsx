@@ -11,7 +11,7 @@ export default function ProductDetails() {
   const params = useParams();
   const [id, setId] = useState(null);
   const [itemslist, setItemsList] = useLocalStorage("Item List", []);
-  let itemslists = JSON.parse(localStorage.getItem("Items Lists")) || [];
+  // let itemslists = JSON.parse(localStorage.getItem("Items Lists")) || [];
 
   const handleAddToCart = (id) => {
     const updatedItemsList = [...itemslist]; //copy of the itemslist
@@ -23,6 +23,27 @@ export default function ProductDetails() {
     }
     setItemsList(updatedItemsList); // Update the state with the updated itemslist
   };
+
+  const getItemQuantity = (itemId) => {
+    const item = itemslist.find(item => item.id === itemId);
+    // console.log(item)
+    return item ? item.item : 0;
+  };
+
+  const handleDecreament = (id) =>{
+    const updatedItemsList = [...itemslist]; // Copy of the itemslist
+    const res = updatedItemsList.find(item => item.id === id);
+    
+    if (res=== undefined) return;
+    else if(res.item === 0)return 
+    else {
+      res.item -=1
+    }
+  
+     const items = updatedItemsList.filter((x)=> x.item !== 0);
+      // console.log({itemslist});
+      setItemsList(items); // Update the state with the updated itemslist
+  }
 
   useEffect(() => {
     const getSingleProduct = async () => {
@@ -36,7 +57,7 @@ export default function ProductDetails() {
         // console.log(doc.id, " => ", doc.data());
         setId(doc.id);
         console.log(doc.id);
-        addToCart(doc.id);
+        // addToCart(doc.id);
         setProduct(doc.data());
       });
       console.log({ querySnapshot });
@@ -45,25 +66,26 @@ export default function ProductDetails() {
 
     getSingleProduct();
 
-    const addToCart = (itemId) => {
-      let selectedItem = itemId;
-      let result = itemslists.find((x) => x.id === selectedItem);
+    // const addToCart = (itemId) => {
+    //   console.log({itemId});
+    //   let selectedItem = itemId;
+    //   let result = itemslists.find((x) => x.id === selectedItem);
 
-      if (result === undefined) {
-        itemslists.push({
-          id: selectedItem,
-          item: 1,
-        });
-      } else {
-        // If item exists, increment its quantity by 1
-        result.item += 1;
-      }
-      // Update localStorage
-      // localStorage.setItem("Item List", JSON.stringify(itemslist));
-    };
+    //   if (result === undefined) {
+    //     itemslists.push({
+    //       id: selectedItem,
+    //       item: 1,
+    //     });
+    //   } else {
+    //     // If item exists, increment its quantity by 1
+    //     result.item += 1;
+    //   }
+    //   // Update localStorage
+    //   // localStorage.setItem("Item List", JSON.stringify(itemslist));
+    // };
   }, [productId, params.productName]);
 
-  console.log(product);
+  // console.log(product);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -112,10 +134,23 @@ export default function ProductDetails() {
 
               <br />
               <button
+                className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 md:"
+                onClick={() => handleDecreament(id)}
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <button
                 className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 md:"
                 onClick={() => handleAddToCart(id)}
               >
-                <i className="fa-solid fa-cart-shopping mr-6"></i>ADD TO CART
+                <i className="fa-solid fa-cart-shopping mr-6"></i>ADD TO CART {getItemQuantity(id)}
+              </button>
+
+              <button
+                className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 md:"
+                onClick={() => handleAddToCart(id)}
+              >
+                <i class="fa-solid fa-plus"></i>
               </button>
             </div>
           </div>

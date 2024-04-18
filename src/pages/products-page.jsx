@@ -125,7 +125,7 @@ function Products() {
                             <img
                               src={PRODUCTS.image}
                               alt=""
-                              className="h-40 w-80 object-cover rounded-xl"
+                              className="h-40 w-80 object-cover rounded-tr-xl rounded-tl-xl"
                             />
 
                             <div className="ml-1">
