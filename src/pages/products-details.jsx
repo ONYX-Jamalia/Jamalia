@@ -55,8 +55,9 @@ export default function ProductDetails() {
       querySnapshot.forEach((doc) => {
         // below commented code is to get the id of the single product
         // console.log(doc.id, " => ", doc.data());
-        setId(doc.id);
-        console.log(doc.id);
+        const productDetails = doc.data();
+        setId(productDetails.id);
+        console.log(doc.data());
         // addToCart(doc.id);
         setProduct(doc.data());
       });
@@ -155,6 +156,7 @@ export default function ProductDetails() {
             </div>
           </div>
         </section>
+
         {/* <section className="w-[20%] bg-white py-16 m-4 text-center md:text-left">
           <div className="justify-center">
             <p>SELLER INFORMATION</p> <hr />

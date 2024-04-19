@@ -41,13 +41,16 @@ export const Cart = () => {
 
         totalAmount();
           }, [itemslist]); 
+          console.log({products});
 
           const availableItems = itemslist.filter(item => item.item > 0);
+          console.log({availableItems});
 
           const finalResults = availableItems.map(item => ({
             ...products.find(product => product.id === item.id),
             quantity: item.quantity
         }));
+        console.log({finalResults});
 
   return (
     <>
