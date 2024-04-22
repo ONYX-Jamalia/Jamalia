@@ -11,6 +11,8 @@ import OrderMgtPage from "./pages/order-management/order-mgt-page";
 import SupplierDashboard from "./pages/supplier/dashboard";
 import AddNewProducts from "./pages/supplier/add-new-products";
 import { Cart } from "./pages/cart";
+import { OrderHistory } from "./pages/order-history/index";
+import { BillingHistory } from "./pages/billing-history/index";
 
 const router = createBrowserRouter([
   { path: "/", element: <Homepage /> },
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
 
   { path: "/supplierdashboard", element: <SupplierDashboard /> },
   { path: "/addnewproducts", element: <AddNewProducts /> },
+  { path: "/orderhistory", element: <OrderHistory /> },
+  { path: "/billinghistory", element: <BillingHistory /> },
+
+
   { path: "/cart", element: <Cart/>}
 ]);
 
