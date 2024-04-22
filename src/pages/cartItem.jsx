@@ -75,7 +75,7 @@ export const CartItem = ({ item }) => {
       </div>
       {/* <Cart subTotal={SubtotalAmout}/> */}
       <div className="absolute top-[5px] right-[10px] p-[10px]">
-        <i onClick={() => removeItem(id)} className="fa-solid fa-xmark text-lg text-black p-[6px] rounded-lg transition ease-in-out delay-150"></i>
+        <i onClick={() => removeItem(id)} className="fa-solid fa-trash hover:cursor-pointer text-lg text-black p-[6px] rounded-lg transition ease-in-out delay-150"></i>
       </div>
     </div>
   );

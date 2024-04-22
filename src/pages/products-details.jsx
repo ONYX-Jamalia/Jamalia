@@ -66,24 +66,6 @@ export default function ProductDetails() {
     setItemsList(itemslist);
 
     getSingleProduct();
-
-    // const addToCart = (itemId) => {
-    //   console.log({itemId});
-    //   let selectedItem = itemId;
-    //   let result = itemslists.find((x) => x.id === selectedItem);
-
-    //   if (result === undefined) {
-    //     itemslists.push({
-    //       id: selectedItem,
-    //       item: 1,
-    //     });
-    //   } else {
-    //     // If item exists, increment its quantity by 1
-    //     result.item += 1;
-    //   }
-    //   // Update localStorage
-    //   // localStorage.setItem("Item List", JSON.stringify(itemslist));
-    // };
   }, [productId, params.productName]);
 
   // console.log(product);
