@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { auth, db, storage } from "../../config/firebase.js";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import { v4 as uuidv4 } from 'uuid';
@@ -17,7 +17,8 @@ export default function AddNewProducts() {
   const [category, setCategory] = useState("Electronics");
   const [unitPrice, setUnitPrice] = useState("");
   const [minimumOrder, setMinimumOrder] = useState("");
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('')
+  const [products, setProducts] = useState(null)
   const [discount, setDiscount] = useState(0); // Added discount state
 
   const handleSubmit = async (event) => {
@@ -64,6 +65,25 @@ export default function AddNewProducts() {
     }
   };
 
+    const getSingleProduct = async () => {
+      const q = await query(
+        collection(db, "products"),
+        where("userId", "==", `${userId}`)
+      );
+      const querySnapshot = await getDocs(q);
+      const productsArray = []
+      querySnapshot.forEach((doc) => {
+        // below commented code is to get the id of the single product
+        // console.log(doc.id, " => ", doc.data());
+        const productDetails = doc.data();
+        productsArray.push(productDetails)
+        setProducts(doc.data());
+      });
+      console.log({productsArray});
+      console.log({ querySnapshot });
+    };
+    
+
   const getUser = () => {
     onAuthStateChanged(auth, (user) => {
       try {
@@ -79,7 +99,12 @@ export default function AddNewProducts() {
     });
   };
 
-  useEffect(getUser,[]);
+  
+
+  useEffect(()=>{
+    getUser()
+    getSingleProduct()
+  },[]);
 
   const handleClear = () => {
     setProductName("");

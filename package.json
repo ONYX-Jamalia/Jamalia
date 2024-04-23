@@ -13,6 +13,7 @@
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "scroll-carousel": "^1.2.7",
+    "shortid": "^2.2.16",
     "swiper": "^11.1.1",
     "usehooks-ts": "^3.1.0",
     "uuid": "^9.0.1",

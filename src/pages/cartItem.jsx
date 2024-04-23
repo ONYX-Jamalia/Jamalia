@@ -59,8 +59,8 @@ export const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="h-[auto] flex items-center relative shadow-lg rounded-lg m-[20px] gap-[10px] pr-[100px] ">
-      <img src={image} className="w-[200px] h-[h-100px] "/>
+    <div className="h-[130px] flex items-center relative shadow-lg rounded-lg m-[20px] gap-[10px] pr-[100px] ">
+      <img src={image} className="w-[400px] rounded-l h-[130px] "/>
       <div className="w-[100%] text-3xl flex gap-[10px]">
         <p>
           <b>{productName}</b>
@@ -75,7 +75,7 @@ export const CartItem = ({ item }) => {
       </div>
       {/* <Cart subTotal={SubtotalAmout}/> */}
       <div className="absolute top-[5px] right-[10px] p-[10px]">
-        <i onClick={() => removeItem(id)} className="fa-solid fa-xmark text-lg text-black p-[6px] rounded-lg transition ease-in-out delay-150"></i>
+        <i onClick={() => removeItem(id)} className="fa-solid fa-trash hover:cursor-pointer text-lg text-black p-[6px] rounded-lg transition ease-in-out delay-150"></i>
       </div>
     </div>
   );

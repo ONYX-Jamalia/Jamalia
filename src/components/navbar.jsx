@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useLocalStorage } from "usehooks-ts";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [itemslist, setItemsList] = useLocalStorage("Item List", []);
   const [totalItems, getItemsTotal] = useState(0);
+  const [userCheck, setUsercheck] = useState(false);
 
   let calculate = () => {
     let cartValue = itemslist.map((x) => x.item).reduce((x, y) => x + y, 0);
@@ -15,10 +18,24 @@ export default function Navbar() {
 
   useEffect(() => {
     calculate();
+    getUser();
   }, [itemslist]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const getUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // const uid = user.uid;
+        setUsercheck(true);
+        console.log(user);
+        // ...
+      } else {
+        // consoole.log('user not available');
+      }
+    });
   };
 
   return (
@@ -141,12 +158,23 @@ export default function Navbar() {
               <button className="btn btn-outline-success  me-3" type="submit">
                 <i className="fa-solid fa-magnifying-glass text-sm lg:text-base"></i>
               </button>
-              <Link
-                className="btn btn-outline-success text-sm lg:text-base"
-                to="/signin"
-              >
-                Login
-              </Link>
+              {userCheck ? <div className="flex gap-2">
+                <Link to={"/supplierdashboard"}>
+                <div className="items-center shadow p-2 rounded-full">
+                <i className="fa-solid fa-user" ></i>
+                </div></Link>
+                <button
+                  to="/signin"
+                  className="btn btn-outline-success text-sm lg:text-base"
+                >
+                  signout
+                </button>
+              </div> : <Link
+                  to="/signin"
+                  className="btn btn-outline-success text-sm lg:text-base"
+                >
+                  Login
+                </Link>}
             </form>
           </div>
         </div>

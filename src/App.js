@@ -13,8 +13,9 @@ import AddNewProducts from "./pages/supplier/add-new-products";
 import SupplierProducts from "./pages/supplier/myproducts";
 
 import { Cart } from "./pages/cart";
-// import { OrderHistory } from "./pages/order-history/index";
-// import { BillingHistory } from "./pages/billing-history/index";
+// import { OrderHistory } from "./pages/order-history/index.jsx";
+// import { BillingHistory } from "./pages/billing-history/index.jsx";
+
 
 const router = createBrowserRouter([
   { path: "/", element: <Homepage /> },
