@@ -140,7 +140,7 @@ function Products() {
                             <div className="flex ml-1">
                               <span>Min. order:</span>
                               <p className="ml-1 px-1 bg-violet-100 rounded text-black cursor-auto">
-                                {PRODUCTS.unitPrice}
+                                {PRODUCTS.minimumOrder}
                               </p>
                               <span>pieces</span>
                             </div>

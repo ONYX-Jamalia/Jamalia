@@ -59,8 +59,8 @@ export const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="h-[auto] flex items-center relative shadow-lg rounded-lg m-[20px] gap-[10px] pr-[100px] ">
-      <img src={image} className="w-[200px] h-[h-100px] "/>
+    <div className="h-[130px] flex items-center relative shadow-lg rounded-lg m-[20px] gap-[10px] pr-[100px] ">
+      <img src={image} className="w-[400px] rounded-l h-[130px] "/>
       <div className="w-[100%] text-3xl flex gap-[10px]">
         <p>
           <b>{productName}</b>

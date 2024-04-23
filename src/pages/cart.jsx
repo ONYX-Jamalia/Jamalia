@@ -94,11 +94,6 @@ export const Cart = () => {
             </div>
             
           </div>
-          {/* <div className="col-2 ">
-            <div className="h-[400px] w-[200px] shadow rounded">
-              
-            </div>
-          </div> */}
         </div>
         
       </div>

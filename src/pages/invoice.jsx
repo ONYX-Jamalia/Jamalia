@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import logo from "../assets/logo.png"
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useLocalStorage } from "usehooks-ts";
+import shortid from "shortid"
 
 export default function Invoice() {
+  const [itemslist, setItemsList] = useLocalStorage("Item List", []);
+  const [date, setDate] = useState(new Date());
+  const [subtotalAmount, setSubtotalAmout] = useState(0);
+  const [products, setProducts] = useState([]);
+
+
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
+
   const [formInfo, setFormInfo] = useState({
     fullName: "",
     email: "",
@@ -14,6 +31,7 @@ export default function Invoice() {
     expirationDate: "",
     cvv: "",
   });
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +42,45 @@ export default function Invoice() {
     event.preventDefault();
     // Here you can use the formInfo state for further processing or submission
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  let totalAmount = () => {
+    if (itemslist.length !== 0) {
+      let amount = itemslist
+        .map((x) => {
+          let { item, id } = x;
+          let result = products.find((y) => y.id === id) || [];
+          return item * result.unitPrice;
+        })
+        .reduce((x, y) => x + y, 0);
+      setSubtotalAmout(amount);
+    } else return setSubtotalAmout(0);
+  };
+
+  useEffect(() => {
+    totalAmount();
+
+    async function getProducts() {
+      const docSnap = await getDocs(collection(db, "products"));
+      let collectionarray = [];
+      docSnap.forEach((result) => {
+        collectionarray.push(result.data());
+      });
+      setProducts(collectionarray);
+    }
+    getProducts();
+  }, [itemslist, totalAmount]);
+  console.log({ products });
+
+  const availableItems = itemslist.filter((item) => item.item > 0);
+  console.log({ availableItems });
+
+  const finalResults = availableItems.map((item) => ({
+    ...products.find((product) => product.id === item.id),
+    quantity: item.quantity,
+  }));
+  console.log({ finalResults });
+
 
   return (
     <>
@@ -124,8 +181,8 @@ export default function Invoice() {
               <div class="flex justify-between mb-6">
                 <h1 class="text-lg font-bold">Invoice</h1>
                 <div class="text-gray-700">
-                  <div>Date: 01/05/2023</div>
-                  <div>Invoice #: INV12345</div>
+                  <div>Date: {formattedDate}</div>
+                  <div>Invoice #: {shortid.generate()}</div>
                 </div>
               </div>
               <div class="mb-8">
