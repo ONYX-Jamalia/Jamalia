@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navbar } from "../../components/supplier/navbar.jsx";
 import { Sidebar } from "../../components/supplier/sidebar.jsx";
 import AddNewProducts from "./add-new-products.jsx";
+import SupplierProducts from "./myproducts.jsx";
 // import AdminExperiences from "./experiences";
 // import AdminAchievements from "./achievements";
 // import AdminPosts from "./createEditManagePosts";
@@ -32,6 +33,7 @@ export default function SupplierDashboard() {
         {/* {userPage === "posts" &&  <AdminPosts sidebarToggle={sidebarToggle} setsetUserPage={setsetUserPage} />}
         {userPage === "achievements" && <p> <AdminAchievements sidebarToggle={sidebarToggle} /> </p>}
         {userPage === "experiences" && <p> <AdminExperiences sidebarToggle={sidebarToggle} /> </p>} */}
+        {userPage === "my-products" && <SupplierProducts sidebarToggle={sidebarToggle} setsetUserPage={setsetUserPage} />}
       </div>
 
       
