@@ -3,38 +3,29 @@ import Navbar from "../components/navbar";
 import { auth } from "../config/firebase";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination, Autoplay } from "swiper/modules";
 import Footer from "../components/footer";
 
 import herobg from "../assets/herobg.png";
-import logo from "../assets/logo.png";
 import electron1 from "../assets/electronic1.png";
 import electron2 from "../assets/electronic2.png";
+import utensils from "../assets/utensils.png";
+import redshirt from "../assets/redshirt.png";
+import flour from "../assets/flour.png";
+import microwave from "../assets/microwave.png";
+import sneakers from "../assets/sneakers.png";
+import wig from "../assets/wig.png";
+import handbag from "../assets/handbag.png";
 
-
-const imageUrls = [
-  logo,
-  logo,
-  logo
-]
 
 
 export default function Homepage() {
 
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === imageUrls.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-
-  const [userEmail, setUserEmail] = useState('')
+  const [, setUserEmail] = useState('')
   const getUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -91,7 +82,7 @@ export default function Homepage() {
         </section>
 
 
-        <section className="bg-orange-600 p-4 md:flex md:py-10 lg:py-16">
+        <section className="bg-orange-400 p-4 md:flex md:py-10 lg:py-16">
 
           <div className="text-center">
           <h4 className="md:text-xl">Trade-in-offer</h4>
@@ -101,8 +92,29 @@ export default function Homepage() {
             <button className="bg-green-800  rounded px-1 font-semibold text-white md:text-xl md:p-2"> <Link to=""> Become A Supplier</Link></button>
           </div>
 
-          <div className="text-center">
-            <h1 className="text-4xl front-bold">Carousel goes here</h1>
+          <div className="md:w-1/2">
+            <Swiper
+            direction={"horizontal"}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination, Autoplay]}
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            className="w-2/3 h-60"
+            >
+              <SwiperSlide><img src={utensils} alt="utensils" /></SwiperSlide>
+              <SwiperSlide><img src={redshirt} alt="red shirt" /></SwiperSlide>
+              <SwiperSlide><img src={microwave} alt="microwave" /></SwiperSlide>
+              <SwiperSlide><img src={sneakers} alt="sneakers" /></SwiperSlide>
+              <SwiperSlide><img src={wig} alt="wig" /></SwiperSlide>
+              <SwiperSlide><img src={handbag} alt="handbag" /></SwiperSlide>
+              <SwiperSlide><img src={flour} alt="flour" /></SwiperSlide>
+            </Swiper>
 
           </div>
 
