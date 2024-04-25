@@ -30,6 +30,13 @@ export default function OrderHistory(){
                   scope="col"
                   class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
+                                Image
+
+                </th>
+                <th
+                  scope="col"
+                  class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                                 Product
 
                 </th>
@@ -59,9 +66,11 @@ export default function OrderHistory(){
                       </div>
                     </div>
                   </td>
-                  <td class=" py-4 whitespace-nowrap flex">
-                  <img src={cutlery} alt="c" className="w-6 h-6" />
-           <h5>Cutlery</h5>
+                  <td class=" py-4 whitespace-nowrap ">
+                  <img src={cutlery} alt="c" className="w-6 h-6 rounded-md" />
+                  </td>
+                  <td class=" py-4 whitespace-nowrap ">
+                    Cutlery
                   </td>
                   
                   <td class=" py-4 whitespace-nowrap text-sm text-gray-500">
