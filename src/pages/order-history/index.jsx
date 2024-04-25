@@ -16,62 +16,67 @@ export default function OrderHistory(){
             
         </div>
 
-        <div className="flex justify-between mt-20 lg:gap-2 px-2.5 py-1.5 mx-40 font-bold">
-            <h5>Order ID</h5>
-            <h5 className="mr-32">Product</h5>
-            <h5>Date</h5>
-            <h5 className="mr-20">Total Amount</h5>
-            <h5 className="mr-56">Status</h5>
-        </div>
-        <hr className="mx-40" />
-        <div className="flex justify-between mt-3 lg:gap-2 px-2.5 py-1.5 mx-40 font-bold">
-            <h5>0000001</h5>
-           <div  className="mr-32 flex">
-            <img src={cutlery} alt="c" className="w-6 h-6" />
+        <table class="min-w-full divide-y divide-gray-200 overflow-x-auto mx-44 mt-10">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                                Order ID
+
+                </th>
+                <th
+                  scope="col"
+                  class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                                Product
+
+                </th>
+                <th
+                  scope="col"
+                  class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                                Total Amount
+
+                </th>
+                <th
+                  scope="col"
+                  class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+              Date 
+                </th>
+              </tr>
+            </thead> 
+         <tbody>
+
+         <tr>
+                  <td class=" py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="ml-3">
+                        <div class="text-sm font-medium text-gray-900">
+                        0000001                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class=" py-4 whitespace-nowrap flex">
+                  <img src={cutlery} alt="c" className="w-6 h-6" />
            <h5>Cutlery</h5>
-           </div>
-            <h5 className="ml-4 text-gray-500">17/04/2024</h5>
-            <h5 className="mr-32">$500</h5>
-            <button className="mr-20 border rounded-md text-green-700 bg-green-200 px-2 text-sm">delivered</button>
-            <button className="border rounded-md bg-blue-800 text-white px-2 text-sm">Invoice</button>
-        </div>
-        <hr className="mx-40 mt-3" />
-        <div className="flex justify-between mt-3 lg:gap-2 px-2.5 py-1.5 mx-40 font-bold">
-            <h5>0000001</h5>
-           <div  className="mr-32 flex">
-            <img src={cutlery} alt="c" className="w-6 h-6" />
-           <h5>Cutlery</h5>
-           </div>
-            <h5 className="ml-4 text-gray-500">20/04/2024</h5>
-            <h5 className="mr-32">$500</h5>
-            <button className="mr-20 border rounded-md text-blue-800 bg-blue-200 px-2 text-sm">shipping</button>
-            <button className="border rounded-md bg-blue-800 text-white px-2 text-sm">Invoice</button>
-        </div>
-        <hr className="mx-40 mt-3" />
-        <div className="flex justify-between mt-3 lg:gap-2 px-2.5 py-1.5 mx-40 font-bold">
-            <h5>0000001</h5>
-           <div  className="mr-32 flex">
-            <img src={furniture} alt="c" className="w-6 h-6" />
-           <h5>Cutlery</h5>
-           </div>
-            <h5 className="ml-4 text-gray-500">20/04/2024</h5>
-            <h5 className="mr-32">$500</h5>
-            <button className="mr-20 border rounded-md text-yellow-400    bg-yellow-100 px-2 text-sm">pending</button>
-            <button className="border rounded-md bg-blue-800 text-white px-2 text-sm">Invoice</button>
-        </div>
-        <hr className="mx-40 mt-3" />
-        <div className="flex justify-between mt-3 lg:gap-2 px-2.5 py-1.5 mx-40 font-bold">
-            <h5>0000001</h5>
-           <div  className="mr-32 flex">
-            <img src={cutlery} alt="c" className="w-6 h-6" />
-           <h5>Cutlery</h5>
-           </div>
-            <h5 className="ml-4 text-gray-500">20/04/2024</h5>
-            <h5 className="mr-28">$500</h5>
-            <button className="mr-12 border rounded-md text-red-400    bg-red-100 px-2 text-sm">out of delivery</button>
-            <button className="border rounded-md bg-blue-800 text-white px-2 text-sm">Invoice</button>
-        </div>
-        <hr className="mx-40 mt-3" />
+                  </td>
+                  
+                  <td class=" py-4 whitespace-nowrap text-sm text-gray-500">
+                  20/04/2024                  </td>
+                  <td class="py-4 whitespace-nowrap text-sm text-gray-500">
+                  $500                  </td>
+                  
+                <td>
+                <button className="border rounded-md bg-blue-800 text-white px-2 text-sm">Invoice</button>
+                </td>
+                </tr>
+                
+              </tbody>
+        </table>
+        
         
         <div className="flex justify-end mt-5 mr-20 motion-reduce:animate-bounce">
         <Link
