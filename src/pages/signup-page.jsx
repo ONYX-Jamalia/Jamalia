@@ -29,6 +29,7 @@ export default function SignUp() {
             conpanyName: signupData.get("companyName"),
             address: signupData.get("address"),
             contactDetails: signupData.get("contactDetails"),
+            email: signupData.get("email")
           });
           setSuccess(true);
           setTimeout(() => {

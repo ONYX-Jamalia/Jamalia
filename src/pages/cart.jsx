@@ -33,7 +33,6 @@ export const Cart = () => {
 
   useEffect(() => {
     totalAmount();
-
     async function getProducts() {
       const docSnap = await getDocs(collection(db, "products"));
       let collectionarray = [];
@@ -43,7 +42,7 @@ export const Cart = () => {
       setProducts(collectionarray);
     }
     getProducts();
-  }, [itemslist, totalAmount]);
+  }, [itemslist]);
   console.log({ products });
 
   const availableItems = itemslist.filter((item) => item.item > 0);
@@ -53,7 +52,6 @@ export const Cart = () => {
     ...products.find((product) => product.id === item.id),
     quantity: item.quantity,
   }));
-  console.log({ finalResults });
 
   return (
     <>

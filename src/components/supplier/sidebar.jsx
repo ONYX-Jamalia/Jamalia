@@ -1,8 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png"
+import { auth } from "../../config/firebase";
+import firebase from "firebase/compat/app";
 
 export const  Sidebar = ({sidebarToggle, setsetUserPage}) => {
+  const navigate = useNavigate()
+
+  
+ const signOut =()=>{
+  auth.signOut().then(function() {
+    console.log('Signed Out');
+    navigate("/signin");
+  }, function(error) {
+    console.error('Sign Out Error', error);
+  });
+ }
 
   return (
     <div className={`${sidebarToggle ? " hidden " : " block " } ease-in-out lg:w-72 bg-neutral-100 border fixed h-full px-2 py-2`}>
@@ -19,11 +32,23 @@ export const  Sidebar = ({sidebarToggle, setsetUserPage}) => {
           </li>
           <li className="text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2"  onClick={()=> setsetUserPage('add-new-product')}>
             
-            <Link className="px-2"><i class="fa-solid fa-plus h-6 mr-2 -mt-2"></i>Add New Product</Link>
+            <Link className="px-2"><i className="fa-solid fa-plus h-6 mr-2 -mt-2"></i>Add New Product</Link>
           </li>
           <li className="text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2"  onClick={()=> setsetUserPage('products')}>
             
-            <Link className="px-2"><i class="fa-solid fa-plus h-6 mr-2 -mt-2"></i>Products</Link>
+            <Link className="px-2"><i className="fa-solid fa-tags h-6 mr-2 -mt-2"></i>Products</Link>
+          </li>
+          <li className="text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2"  onClick={()=> setsetUserPage('billing-history')}>
+            
+            <Link className="px-2"><i className="fa-brands fa-stack-overflow h-6 mr-2 -mt-2"></i>Billing History</Link>
+          </li>
+          <li className="text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2"  onClick={()=> setsetUserPage('order-history')}>
+            
+            <Link className="px-2"><i className="fa-solid fa-box-archive h-6 mr-2 -mt-2"></i>Other History</Link>
+          </li>
+          <li onClick={signOut} className="mt-5 text-sm mb-2 rounded hover:shadow hover:bg-green-700 hover:text-white py-2">
+            
+            <Link className="px-2"><i className="fa-solid fa-right-from-bracket h-6 mr-2 -mt-2"></i>LogOut</Link>
           </li>
         </ul>
     </div>
