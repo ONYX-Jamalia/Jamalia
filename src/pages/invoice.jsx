@@ -73,7 +73,8 @@ export default function Invoice() {
       cardNumber: formInfo.cardNumber,
       cardOwner: formInfo.cardOwner,
       expirationDate: formInfo.expirationDate,
-      cvv: formInfo.cvv
+      cvv: formInfo.cvv,
+      userId: userDetails.userId
       });
 
     if(results){

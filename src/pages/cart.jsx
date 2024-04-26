@@ -42,7 +42,7 @@ export const Cart = () => {
       setProducts(collectionarray);
     }
     getProducts();
-  }, [itemslist]);
+  }, [itemslist, subtotalAmount]);
   console.log({ products });
 
   const availableItems = itemslist.filter((item) => item.item > 0);

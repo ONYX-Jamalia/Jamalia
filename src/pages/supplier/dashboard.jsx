@@ -3,10 +3,9 @@ import { Navbar } from "../../components/supplier/navbar.jsx";
 import { Sidebar } from "../../components/supplier/sidebar.jsx";
 import AddNewProducts from "./add-new-products.jsx";
 import { ProductsList } from "../productslist.jsx";
-// import AdminExperiences from "./experiences";
-// import AdminAchievements from "./achievements";
-// import AdminPosts from "./createEditManagePosts";
-// import { DashboardItems } from "./dashboardItems";
+import SupplierProducts from "./myproducts.jsx";
+import BillingHistory from "../billing-history/index.jsx";
+import OrderHistory from "../order-history/index.jsx";
 
 export default function SupplierDashboard() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
@@ -37,6 +36,8 @@ export default function SupplierDashboard() {
         {/* {userPage === "posts" &&  <AdminPosts sidebarToggle={sidebarToggle} setsetUserPage={setsetUserPage} />}
         {userPage === "achievements" && <p> <AdminAchievements sidebarToggle={sidebarToggle} /> </p>}
         {userPage === "experiences" && <p> <AdminExperiences sidebarToggle={sidebarToggle} /> </p>} */}
+        {userPage === "billing-history" && <BillingHistory sidebarToggle={sidebarToggle} setsetUserPage={setsetUserPage} />}
+        {userPage === "order-history" && <OrderHistory sidebarToggle={sidebarToggle} setsetUserPage={setsetUserPage} />}
       </div>
 
       
